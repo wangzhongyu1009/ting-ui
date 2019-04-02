@@ -1,2 +1,2 @@
 # ting-cli
-组件封装的npm package
+vue组件二次封装
