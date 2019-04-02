@@ -1,0 +1,24 @@
+{
+  "name": "ting-cli",
+  "version": "1.0.1",
+  "description": "工具类",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangzhongyu1009/ting-cli.git"
+  },
+  "keywords": [
+    "Array",
+    "index"
+  ],
+  "author": "wangzhongyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangzhongyu1009/ting-cli/issues"
+  },
+  "homepage": "https://github.com/wangzhongyu1009/ting-cli#readme"
+}
