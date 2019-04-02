@@ -1,6 +1,6 @@
 {
   "name": "ting-cli",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "description": "工具类",
   "main": "index.js",
   "bin": "index.js",
