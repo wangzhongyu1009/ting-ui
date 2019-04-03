@@ -27,6 +27,7 @@
 <style lang="scss" scoped>
 .btn {
   color: red;
+  font-size: 12px;
 }
 .button {
   padding: 5px;
