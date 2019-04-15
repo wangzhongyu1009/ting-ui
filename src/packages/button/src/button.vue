@@ -1,8 +1,21 @@
 <template>
   <div>
-    <div class="btn">这是一个按钮</div>
-
-    <button class="button">我是一个按钮</button>
+     <!-- 按钮
+     * @type {primary:主要按钮}
+     * @type {success:成功按钮}
+     * @type {info:信息按钮}
+     * @type {warning:警告按钮}
+     * @type {danger:危险按钮}
+     * @type {text:文字按钮}
+     * @plain {true:朴素模式}
+     -->
+    <el-button
+     :type="type"
+     :plain="plain"
+     :disabled="disabled"
+     :loading="loading"
+     @click="click"
+    >{{text}}</el-button>
   </div>
 </template>
 
@@ -13,25 +26,47 @@
       return {}
     },
     props: {
-      
+      type: {
+        type: String,
+        required: false,
+        default: 'primary'
+      },
+      plain: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      loading: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      text: {
+        type: String,
+        required: false,
+        default: '系统按钮'
+      }
     },
     computed: {
       
     },
     methods: {
-      
+      click () {
+        this.$emit('click')
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-.btn {
-  color: red;
-  font-size: 12px;
-}
-.button {
-  padding: 5px;
-  background-color: blue;
-  color: #fff;
+.el-button {
+ font-size: 12px;
+ font-weight: 400;
+ padding: 10px 16px;
 }
 </style>
