@@ -67,6 +67,7 @@
 .el-button {
  font-size: 12px;
  font-weight: 400;
- padding: 10px 16px;
+ padding: 0px 21px;
+ height: 28px;
 }
 </style>

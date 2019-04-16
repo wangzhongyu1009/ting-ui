@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <span class="label" :style="labelStyle">{{label}}：</span>
-    <el-select :value="value" @input="inputFun" size="small" filterable :placeholder="placeholder">
+    <el-select :value="value" @input="inputFun" size="mini" filterable :placeholder="placeholder">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -63,8 +63,8 @@
 <style lang="scss" scoped>
 .select /deep/ .el-input__inner {
  font-size: 12px;
- height: 34px;
- line-height: 34px;
+ height: 28px;
+ line-height: 28px;
 }
 .select {
   & > span {

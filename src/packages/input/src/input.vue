@@ -50,8 +50,8 @@
 
 <style lang="scss" scoped>
 .input /deep/ .el-input__inner {
- height: 34px;
- line-height: 34px;
+ height: 28px;
+ line-height: 28px;
  font-size: 12px;
 }
 .input {

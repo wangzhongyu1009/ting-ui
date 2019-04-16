@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <div v-for="(item,index) in optionsProp" :key="index">
+    <div class="searchInput" v-for="(item,index) in optionsProp" :key="index">
 
       <t-input
       v-if="item.type === 'input'"
@@ -30,10 +30,14 @@
 
 <style lang="scss" scoped>
 .search {
-  margin: 10px;
+  margin: 10px 0;
+  padding-bottom: 15px;
+  background-color: #F7F7F7;
+  border-radius: 4px;
+  border: 1px solid #ECECEC;
   & > div {
     display: inline-block;
-    margin: 10px 20px 10px 0;
+    margin: 15px 15px 0 0;
   }
 }
 </style>
