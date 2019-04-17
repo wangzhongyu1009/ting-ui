@@ -1,18 +1,19 @@
 <template>
   <div class="select">
     <span class="label" :style="labelStyle">{{label}}：</span>
-    <el-select :value="value" @input="inputFun" size="mini" filterable :placeholder="placeholder">
-      <el-option
+    <Select :value="value" @input="inputFun" filterable :placeholder="placeholder">
+      <Option
         v-for="item in options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-      </el-option>
-    </el-select>
+      </Option>
+    </Select>
   </div>
 </template>
 
 <script>
+import { Select, Option } from 'iview'
   export default {
     name: 'TSelect',
     data () {
@@ -21,6 +22,10 @@
           width: this.labelWidth + 'px'
         }
       }
+    },
+    components: {
+      Select,
+      Option
     },
     props: {
       placeholder: {
@@ -61,10 +66,18 @@
 </script>
 
 <style lang="scss" scoped>
-.select /deep/ .el-input__inner {
+.select /deep/ .ivu-select-selection {
  font-size: 12px;
  height: 28px;
  line-height: 28px;
+}
+.select /deep/ .ivu-select-input {
+ font-size: 12px;
+ height: 28px;
+ line-height: 28px;
+}
+.select /deep/ .ivu-select {
+ width: 173px;
 }
 .select {
   & > span {

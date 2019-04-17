@@ -61,11 +61,16 @@ module.exports = {
         }
       },
       {
+        test: /iview.src.*?js$/,
+        loader: 'babel-loader'
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         options: {
           presets: ['es2015']
-        }
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

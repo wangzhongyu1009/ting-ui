@@ -3,32 +3,38 @@ export default {
     return {
       // table
       columns: [{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '日期',
-        value: 'date',
-        width: 120
+        title: '日期',
+        key: 'date',
+        minWidth: 120
       },{
-        label: '操作',
-        width: 60,
+        title: '日期',
+        key: 'date',
+        minWidth: 120
+      },{
+        title: '操作',
+        width: 150,
+        fixed: 'right',
+        slot: 'operate',
         operate: [{
           label: '查看',
           method: 'aaa'

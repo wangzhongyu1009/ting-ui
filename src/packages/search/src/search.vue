@@ -3,7 +3,7 @@
     <div class="searchInput" v-for="(item,index) in optionsProp" :key="index">
 
       <t-input
-      v-if="item.type === 'input'"
+       v-if="item.type === 'input'"
        :label="item.label"
        :placeholder="item.placeholder"
        :labelWidth="item.labelWidth"
@@ -11,7 +11,7 @@
       ></t-input>
 
       <t-select
-      v-if="item.type === 'select'"
+       v-if="item.type === 'select'"
        :label="item.label"
        :placeholder="item.placeholder"
        :labelWidth="item.labelWidth"

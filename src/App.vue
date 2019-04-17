@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <t-search @table-search="search" :options="searchOptions" :operate="searchOperate" @exportExcel="exportExcel" @add="add"></t-search>
-    <t-table theme="light" multiple @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption"></t-table>
+
+    <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption"></t-table>
   </div>
 </template>
 
@@ -94,6 +95,9 @@ export default {
     },
     add () {
       console.log('自定义按钮---新增')
+    },
+    multipleSelect (val) {
+      console.log(val, '已选条目')
     }
   }
 }

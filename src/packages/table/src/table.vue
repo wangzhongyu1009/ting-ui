@@ -1,99 +1,77 @@
 <template>
-  <div class="element-table">
-    <el-table
+  <div class="table">
+    <Table
       :data="tableData"
+      :columns="columnsProp"
       :border="true"
-      :show-header="true"
-      :header-cell-class-name="themeClass"
-      cell-class-name="headerTitleColor"
-      @selection-change="handleSelectionChange"
-      style="width:100%">
-
-      <el-table-column
-        type="selection"
-        v-if="multiple"
+      @on-selection-change="handleSelectionChange"
       >
-      </el-table-column>
+      
+      <template v-for="operate in operateData" slot-scope="{row,index}" :slot="operate.slot">
+        <span>
+          <t-button
+           v-for="(item,index) in operate.operate"
+           :key="index"
+           @click="handleClick(row, item.method)"
+           type="text"
+           :text="item.label"
+          ></t-button>
+        </span>
+      </template>
 
-      <el-table-column
-        v-for="(item,index) in columns"
-        :prop="item.value"
-        :label="item.label"
-        :key="index"
-        class-name="commonColor"
-        :min-width="item.width"
-        >
-        <template slot-scope="scope">
-          <span v-if="!item.value">
-            <el-button
-             v-for="(operate,index) in item['operate']"
-             :key="index"
-             @click="handleClick(scope.row, operate.method)"
-             type="text"
-             size="small"
-            >{{operate.label}}</el-button>
-          </span>
-          <span v-else>{{scope.row[item.value]}}</span>
-        </template>
-      </el-table-column>
-
-    </el-table>
+    </Table>
     
     <div class="pagination" v-if="pagination">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="paginationOption.pageNum"
-        :page-sizes="paginationOption.pageSizes"
+      <Page
+        @on-page-size-change="handleSizeChange"
+        @on-change="handleCurrentChange"
+        :current="paginationOption.pageNum"
+        :page-size-opts="paginationOption.pageSizes"
         :page-size="paginationOption.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
+        show-elevator
+        show-sizer
+        show-total
+        size="small"
         :total="paginationOption.total">
-      </el-pagination>
+      </Page>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.element-table {
-  & > div {
-    border-radius: 4px 4px 0 0;
+<style lang="scss" scoped>
+.table /deep/ .ivu-table-header {
+  th {
+    border-right: none;
+    background-color: #F7F7F7;
+    color: #000;
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    height: 50px;
+    text-align: center;
   }
 }
-.titleColor{
-  color: #0486FE;
+.table /deep/ .ivu-table-wrapper {
+  border: 1px solid #ECECEC;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
 }
-.commonColor {
-  color: rgba(0,0,0,0.65);
+.table /deep/ .ivu-table-body {
+  .ivu-table-cell {
+    color: rgba(0,0,0,0.65);
+    font-size: 12px;
+    text-align: center;
+  }
 }
-.header_color_normal {
-  background-color: #f7f7f7 !important;
-  color: #000;
-  font-weight: 400;
-  font-size: 12px;
+.table /deep/ .ivu-table th {
+  height: 50px;
+  text-align: center;
 }
-.header_color_dark {
-  background-color: #909399 !important;
-  color: #fff;
-  font-weight: 400;
-  font-size: 12px;
+.table /deep/ .ivu-table-cell {
+  text-align: center;
 }
-.header_color_brand {
-  background-color: #409EFF !important;
-  color: #fff;
-  font-weight: 400;
-  font-size: 12px;
-}
-.title_border {
-  border-right: none !important;
-}
-.el-table th>.cell{
-  display: flex;
-  justify-content: center;
-}
-.el-table .cell, .el-table th div{
-  display: flex;
-  justify-content: center;
-}
+
 .pagination {
   text-align: right;
   margin: 10px 20px;
@@ -101,12 +79,17 @@
 </style>
 
 <script>
+import { Table, Page } from 'iview'
   export default {
     name: 'TTable',
     data () {
       return {
         
       }
+    },
+    components: {
+      Table,
+      Page
     },
     props: {
       columns: {
@@ -164,11 +147,28 @@
           }
         }
         return themeObj[this.theme]
+      },
+      operateData () {
+        let arr = []
+        this.columns.forEach(item => {
+          if (item.operate) arr.push(item)
+        })
+        return arr
+      },
+      columnsProp () {
+        if (this.multiple) {
+          this.columns.unshift({
+            type: 'selection',
+            align: 'center',
+            width: 50
+          })
+        }
+        return this.columns
       }
     },
     methods: {
-      handleSelectionChange () {
-
+      handleSelectionChange (val) {
+        this.$emit('multiple-select', val)
       },
       handleClick (item, method) {
         this.$emit(method, item)

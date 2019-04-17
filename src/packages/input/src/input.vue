@@ -1,11 +1,12 @@
 <template>
   <div class="input">
     <span class="label" :style="labelStyle">{{label}}：</span>
-    <el-input :value="value" @input="inputFun" :placeholder="placeholder"></el-input>
+    <Input :value="value" @input="inputFun" :placeholder="placeholder"></Input>
   </div>
 </template>
 
 <script>
+import { Input } from 'iview'
   export default {
     name: 'TInput',
     data () {
@@ -14,6 +15,9 @@
           width: this.labelWidth + 'px'
         }
       }
+    },
+    components: {
+      Input
     },
     props: {
       placeholder: {
@@ -49,7 +53,7 @@
 </script>
 
 <style lang="scss" scoped>
-.input /deep/ .el-input__inner {
+.input /deep/ .ivu-input {
  height: 28px;
  line-height: 28px;
  font-size: 12px;
@@ -59,7 +63,7 @@
     font-size: 12px;
     color: #666;
   }
-  & > .el-input {
+  & > .ivu-input-wrapper {
     display: inline-block;
     width: auto;
     min-width: 173px;

@@ -4,7 +4,7 @@ import Button from './button/index.js'
 import Search from './search/index.js'
 import Input from './input/index.js'
 import Select from './select/index.js'
-
+import 'iview/dist/styles/iview.css'
 const components = [
   Table,
   Switch,
