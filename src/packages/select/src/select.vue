@@ -1,7 +1,7 @@
 <template>
   <div class="select">
-    <span class="label" :style="labelStyle">{{label}}：</span>
-    <Select :value="value" @input="inputFun" filterable :placeholder="placeholder">
+    <span v-if="label" class="label" :style="labelStyle">{{label}}：</span>
+    <Select :value="value" @input="inputFun" :filterable="filterable" :placeholder="placeholder" @on-change="onChange">
       <Option
         v-for="item in options"
         :key="item.value"
@@ -52,6 +52,11 @@ import { Select, Option } from 'iview'
         type: Number,
         required: false,
         default: 60
+      },
+      filterable: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
     computed: {
@@ -60,6 +65,9 @@ import { Select, Option } from 'iview'
     methods: {
       inputFun ($event) {
         this.$emit('input', $event)
+      },
+      onChange (item) {
+        this.$emit('on-change', item)
       }
     }
   }

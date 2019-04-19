@@ -3,6 +3,7 @@
     <t-search @table-search="search" :options="searchOptions" :operate="searchOperate" @exportExcel="exportExcel" @add="add"></t-search>
 
     <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption"></t-table>
+
   </div>
 </template>
 
@@ -67,6 +68,18 @@ export default {
         type: 'select',
         key: 'value6',
         value: ''
+      },{
+        type: 'carno',
+        key: 'value9',
+        value: ''
+      },{
+        type: 'date',
+        label: '入网时间',
+        labelWidth: 80,
+        startKey: 'value7',
+        startValue: '',
+        endKey: 'value8',
+        endValue: ''
       }],
       searchOperate: [{
         text: '导出',

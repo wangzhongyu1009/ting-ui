@@ -12,6 +12,7 @@
     <Button
      :type="typeProp"
      :disabled="disabled"
+     :size="sizeProp"
      :loading="loading"
      @click="click"
     >{{text}}</Button>
@@ -48,6 +49,11 @@ import { Button } from 'iview'
         type: String,
         required: false,
         default: '系统按钮'
+      },
+      larger: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
     computed: {
@@ -56,6 +62,13 @@ import { Button } from 'iview'
           return ""
         } else {
           return this.type
+        }
+      },
+      sizeProp () {
+        if (this.larger) {
+          return 'large'
+        } else {
+          return 'small'
         }
       }
     },
@@ -86,5 +99,10 @@ import { Button } from 'iview'
 }
 .ivu-btn-text:hover {
   background: none;
+}
+.ivu-btn-large {
+  height: 40px !important;
+  width: 95px;
+  font-size: 14px !important;
 }
 </style>

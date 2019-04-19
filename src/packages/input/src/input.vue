@@ -1,7 +1,7 @@
 <template>
   <div class="input">
-    <span class="label" :style="labelStyle">{{label}}：</span>
-    <Input :value="value" @input="inputFun" :placeholder="placeholder"></Input>
+    <span v-if="label" class="label" :style="labelStyle">{{label}}：</span>
+    <Input :value="value" @input="inputFun" :placeholder="placeholder" :maxlength="maxlength" @on-change="onChange"></Input>
   </div>
 </template>
 
@@ -39,6 +39,11 @@ import { Input } from 'iview'
         type: Number,
         required: false,
         default: 60
+      },
+      maxlength: {
+        type: Number,
+        required: false,
+        default: 10000
       }
     },
     computed: {
@@ -47,6 +52,9 @@ import { Input } from 'iview'
     methods: {
       inputFun ($event) {
         this.$emit('input', $event)
+      },
+      onChange ($event) {
+        this.$emit('on-change', $event.target.value)
       }
     }
   }

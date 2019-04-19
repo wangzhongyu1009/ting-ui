@@ -4,6 +4,8 @@ import Button from './button/index.js'
 import Search from './search/index.js'
 import Input from './input/index.js'
 import Select from './select/index.js'
+import DatePicker from './datePicker/index.js'
+import CarNo from './carNo/index.js'
 import 'iview/dist/styles/iview.css'
 const components = [
   Table,
@@ -11,7 +13,9 @@ const components = [
   Button,
   Search,
   Input,
-  Select
+  Select,
+  DatePicker,
+  CarNo
 ]
 
 const install = function(Vue) {
@@ -31,5 +35,7 @@ export default {
   Button,
   Search,
   Input,
-  Select
+  Select,
+  DatePicker,
+  CarNo
 }

@@ -44,7 +44,7 @@
       }
     },
     computed: {
-      checked() {
+      checked () {
         return this.value === this.activeValue;
       }
     },

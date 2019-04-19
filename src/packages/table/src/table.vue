@@ -67,6 +67,7 @@
 .table /deep/ .ivu-table th {
   height: 50px;
   text-align: center;
+  border-bottom: 1px solid #ECECEC;
 }
 .table /deep/ .ivu-table-cell {
   text-align: center;
@@ -80,113 +81,113 @@
 
 <script>
 import { Table, Page } from 'iview'
-  export default {
-    name: 'TTable',
-    data () {
-      return {
-        
+export default {
+  name: 'TTable',
+  data () {
+    return {
+      
+    }
+  },
+  components: {
+    Table,
+    Page
+  },
+  props: {
+    columns: {
+      type: Array,
+      required: true,
+      default: () => []
+    },
+    tableData: {
+      type: Array,
+      required: true,
+      default: () => []
+    },
+    theme: {
+      type: String,
+      required: false,
+      default: 'light'
+    },
+    multiple: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    titleBorder: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    pagination : {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    paginationOption: {
+      required: false,
+      default: {
+        total: 0,
+        pageNum: 1,
+        pageSize: 10,
+        pageSizes: [10, 20, 30, 40]
       }
     },
-    components: {
-      Table,
-      Page
-    },
-    props: {
-      columns: {
-        type: Array,
-        required: true,
-        default: () => []
-      },
-      tableData: {
-        type: Array,
-        required: true,
-        default: () => []
-      },
-      theme: {
-        type: String,
-        required: false,
-        default: 'light'
-      },
-      multiple: {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      titleBorder: {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      pagination : {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      paginationOption: {
-        required: false,
-        default: {
-          total: 0,
-          pageNum: 1,
-          pageSize: 10,
-          pageSizes: [10, 20, 30, 40]
-        }
-      },
-    },
-    computed: {
-      themeClass () {
-        let themeObj = {
-          'light': 'header_color_normal',
-          'dark': 'header_color_dark',
-          'brand': 'header_color_brand'
-        }
-        if (!this.titleBorder) {
-          themeObj = {
-            'light': 'header_color_normal title_border',
-            'dark': 'header_color_dark title_border',
-            'brand': 'header_color_brand title_border'
-          }
-        }
-        return themeObj[this.theme]
-      },
-      operateData () {
-        let arr = []
-        this.columns.forEach(item => {
-          if (item.operate) arr.push(item)
-        })
-        return arr
-      },
-      columnsProp () {
-        if (this.multiple) {
-          this.columns.unshift({
-            type: 'selection',
-            align: 'center',
-            width: 50
-          })
-        }
-        return this.columns
+  },
+  computed: {
+    themeClass () {
+      let themeObj = {
+        'light': 'header_color_normal',
+        'dark': 'header_color_dark',
+        'brand': 'header_color_brand'
       }
+      if (!this.titleBorder) {
+        themeObj = {
+          'light': 'header_color_normal title_border',
+          'dark': 'header_color_dark title_border',
+          'brand': 'header_color_brand title_border'
+        }
+      }
+      return themeObj[this.theme]
     },
-    methods: {
-      handleSelectionChange (val) {
-        this.$emit('multiple-select', val)
-      },
-      handleClick (item, method) {
-        this.$emit(method, item)
-      },
-      handleSizeChange (val) {
-        this.paginationOption.pageSize = val
-        this.$emit('pagination-change', {
-          pageNum: this.paginationOption.pageNum,
-          pageSize: val
-        })
-      },
-      handleCurrentChange (val) {
-        this.paginationOption.pageNum = val
-        this.$emit('pagination-change', {
-          pageNum: val,
-          pageSize: this.paginationOption.pageSize
+    operateData () {
+      let arr = []
+      this.columns.forEach(item => {
+        if (item.operate) arr.push(item)
+      })
+      return arr
+    },
+    columnsProp () {
+      if (this.multiple && this.columns.length > 0 && this.columns[0].type != 'selection') {
+        this.columns.unshift({
+          type: 'selection',
+          align: 'center',
+          width: 50
         })
       }
+      return this.columns
+    }
+  },
+  methods: {
+    handleSelectionChange (val) {
+      this.$emit('multiple-select', val)
+    },
+    handleClick (item, method) {
+      this.$emit(method, item)
+    },
+    handleSizeChange (val) {
+      this.paginationOption.pageSize = val
+      this.$emit('pagination-change', {
+        pageNum: this.paginationOption.pageNum,
+        pageSize: val
+      })
+    },
+    handleCurrentChange (val) {
+      this.paginationOption.pageNum = val
+      this.$emit('pagination-change', {
+        pageNum: val,
+        pageSize: this.paginationOption.pageSize
+      })
     }
   }
+}
 </script>
