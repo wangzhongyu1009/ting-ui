@@ -1,9 +1,10 @@
 <template>
   <div style="display:inline-block">
-    <t-button :text="buttonText" :larger="larger" @click="modal=true"></t-button>
+    <t-button :text="buttonText" :type="buttonType" :larger="larger" @click="modal=true"></t-button>
     <Modal
       v-model="modal"
       :mask-closable="false"
+      width="450"
       >
       <p slot="header" class="dialog_header">
         <span>{{title}}</span>
@@ -36,6 +37,11 @@ import { Modal } from 'iview'
         type: String,
         required: false,
         default: '弹窗'
+      },
+      buttonType: {
+        type: String,
+        required: false,
+        default: 'primary'
       },
       larger: {
         type: Boolean,
@@ -82,7 +88,7 @@ import { Modal } from 'iview'
   font-size: 14px;
 }
 .dialog_content {
-  margin: 10px 80px 10px 70px;
+  margin: 10px 40px 10px 35px;
   color: #333;
   font-size: 14px;
   text-align: center;

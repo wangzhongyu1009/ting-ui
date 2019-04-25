@@ -1,6 +1,6 @@
 <template>
   <div style="display:inline-block">
-    <t-button :text="buttonText" :larger="larger" @click="openModal"></t-button>
+    <t-button :text="buttonText" :type="buttonType" :larger="larger" @click="openModal"></t-button>
     <Modal
       v-model="modal"
       :mask-closable="false"
@@ -10,7 +10,7 @@
       </p>
       <div :class="labelClass">
         <i-form ref="oForm" :model="formValidate" :rules="ruleValidate" :label-width="labelWidth" :label-position="labelPosition">
-          <Form-item :label="item.label" :prop="item.key" v-for="(item,index) in items" :key="index">
+          <Form-item :label="item.label" :prop="item.key" v-for="(item,index) in items" :key="index" :class="item.type">
 
               <i-input v-if="item.type=='input'" v-model="formValidate[item.key]" :placeholder="item.placeholder"></i-input>
 
@@ -24,6 +24,33 @@
 
               <i-input v-if="item.type=='textarea'" v-model="formValidate[item.key]" :placeholder="item.placeholder" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></i-input>
 
+              <t-car-no
+               v-if="item.type === 'carno'"
+               ref="carNo"
+               @car-no-change="carNoChange"
+               :labelWidth="106"
+               :itemKey="item.key"
+               :provinceProp="''"
+               :numberProp="''"
+              ></t-car-no>
+
+              <Upload
+                ref="upload"
+                v-if="item.type === 'uploadfile'"
+                v-model="formValidate[item.key]"
+                :show-upload-list="false"
+                :format="['jpg','jpeg','png']"
+                action="http"
+                :before-upload="handleBeforeUpload"
+              >
+                <t-button text="上传图片" type="plain" @click="uploadClick(item.key)"></t-button>
+              </Upload>
+              <img
+                v-if="item.type === 'uploadfile'"
+                class="company_img"
+                :src="formValidate[item.key]"
+              >
+
           </Form-item>
         </i-form>
       </div>
@@ -36,7 +63,7 @@
 </template>
 
 <script>
-import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox } from 'iview'
+import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, Upload } from 'iview'
   export default {
     name: 'TDialogForm',
     components: {
@@ -47,13 +74,16 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
       ISelect: Select,
       IOption: Option,
       CheckboxGroup,
-      Checkbox
+      Checkbox,
+      Upload
     },
     data () {
       return {
         modal: false,
         formValidate: {},
-        ruleValidate: {}
+        ruleValidate: {},
+        carNo: {},
+        currentKey: ''
       }
     },
     props: {
@@ -66,6 +96,11 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
         type: String,
         required: false,
         default: '对话框'
+      },
+      buttonType: {
+        type: String,
+        required: false,
+        default: 'primary'
       },
       larger: {
         type: Boolean,
@@ -130,7 +165,7 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
     },
     computed: {
       labelWidth () {
-        return this.labelPosition === 'right' ? 100 : null
+        return this.labelPosition === 'right' ? 110 : null
       },
       labelClass () {
         return this.labelPosition === 'right' ? 'label_right' : 'label_top'
@@ -138,19 +173,50 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
     },
     methods: {
       openModal () {
+        if (this.$refs.carNo) {
+          this.$refs.carNo.forEach(item => {
+            item.province = ''
+            item.number = ''
+            item.provinceProp = ''
+            item.numberProp = ''
+          })
+        }
+        this.carNo = {}
         this.$refs['oForm'].resetFields()
         this.modal = true
       },
       submit () {
         this.$refs['oForm'].validate((valid) => {
           if (valid) {
-            this.$emit('submit', this.formValidate)
+            this.$emit('submit', Object.assign(this.formValidate,this.carNo))
             this.modal = false
           }
         })
       },
       cancel () {
         this.modal = false
+      },
+      carNoChange (val) {
+        Object.assign(this.carNo,val)
+      },
+      uploadClick (val) {
+        this.currentKey = val
+      },
+      async handleBeforeUpload (file) {
+        this.formValidate[this.currentKey] = await this.createFileReader(file)
+        return false
+      },
+      createFileReader (file) {
+        return new Promise((resolve) => {
+          let reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = function () {
+            resolve(this.result)
+          }
+          reader.onerror = function () {
+            resolve(null)
+          }
+        })
       }
     }
   }
@@ -167,5 +233,23 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
 }
 .label_right {
   padding: 0 100px 0 20px;
+}
+.label_right /deep/ .carno {
+  & > div {
+    margin-left: 0 !important;
+  }
+}
+.carno /deep/ .label {
+  padding: 10px 12px 10px 0;
+}
+.carno /deep/ .select {
+  line-height: 16px;
+}
+.uploadfile /deep/ .ivu-form-item-content {
+  line-height: 10px;
+}
+.company_img {
+  margin-top: 10px;
+  width: 274px;
 }
 </style>

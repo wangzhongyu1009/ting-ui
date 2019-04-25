@@ -24,14 +24,14 @@ export default {
         type: 'input',
         key: 'name',
         placeholder: '请输入',
-        label: '姓名',
+        label: '姓名：',
         required: true,
         message: '姓名不可为空'
       },{
         type: 'select',
         key: 'city',
         placeholder: '请输入',
-        label: '城市',
+        label: '城市：',
         required: true,
         message: '城市不能为空',
         options: [{
@@ -47,7 +47,7 @@ export default {
       },{
         type: 'checkbox',
         key: 'fruit',
-        label: '报警提示种类',
+        label: '报警提示种类：',
         required: true,
         message: '勾选种类',
         min: 1,
@@ -68,9 +68,27 @@ export default {
         type: 'textarea',
         key: 'des',
         placeholder: '请输入',
-        label: 'hahahaha',
+        label: 'hahahaha：',
         required: true,
         message: '姓名不可为空'
+      },{
+        type: 'carno',
+        key: 'carnoaa'
+      },{
+        type: 'carno',
+        key: 'carnobb'
+      },{
+        type: 'uploadfile',
+        key: 'img',
+        label: '上传行驶证：',
+        required: true,
+        message: '请上传图片'
+      },{
+        type: 'uploadfile',
+        key: 'img2',
+        label: '上传行驶证：',
+        required: true,
+        message: '请上传图片'
       }],
       searchOptions: [{
         type: 'input',
