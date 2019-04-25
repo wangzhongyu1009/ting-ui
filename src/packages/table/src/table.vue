@@ -97,6 +97,9 @@
     text-align: center;
   }
 }
+.table /deep/ .ivu-table-cell {
+  padding: 0;
+}
 .table /deep/ .ivu-table th {
   height: 50px;
   text-align: center;
