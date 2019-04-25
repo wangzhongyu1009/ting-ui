@@ -5,12 +5,21 @@
      * @type {success:成功按钮}
      * @type {info:信息按钮}
      * @type {warning:警告按钮}
-     * @type {danger:危险按钮}
+     * @type {error:危险按钮}
      * @type {text:文字按钮}
      * @type {plain:朴素模式}
      -->
     <Button
+     v-if="typeProp"
      :type="typeProp"
+     :disabled="disabled"
+     :size="sizeProp"
+     :loading="loading"
+     @click="click"
+    >{{text}}</Button>
+
+    <Button
+     v-if="!typeProp"
      :disabled="disabled"
      :size="sizeProp"
      :loading="loading"
@@ -102,7 +111,11 @@ import { Button } from 'iview'
 }
 .ivu-btn-large {
   height: 40px !important;
-  width: 95px;
   font-size: 14px !important;
+  min-width: 100px !important;
+}
+.ivu-btn-error {
+  background-color: #F04134;
+  border-color: #F04134;
 }
 </style>

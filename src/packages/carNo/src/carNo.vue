@@ -4,7 +4,7 @@
      style="display:inline-block"
      label="车牌号"
      placeholder="全部"
-     :labelWidth="80"
+     :labelWidth="labelWidth"
      v-model="province"
      :options="areaList"
      @on-change="selectOnChange"
@@ -45,6 +45,11 @@ export default {
       type: String,
       required: false,
       default: 'carNo'
+    },
+    labelWidth: {
+      type: Number,
+      required: false,
+      default: 80
     }
   },
   computed: {
@@ -54,9 +59,6 @@ export default {
   },
   data () {
     return {
-      labelStyle: {
-        width: this.labelWidth + 'px'
-      },
       province: this.provinceProp,
       number: this.numberProp
     }
@@ -100,7 +102,7 @@ export default {
   text-indent: 6px;
 }
 .NumberPlate /deep/ .ivu-select {
-  width: 60px;
+  width: 60px !important;
 }
 .NumberPlate /deep/ .ivu-select-selection {
   border-radius: 4px 0 0 4px;
@@ -117,8 +119,8 @@ export default {
   border-color: #dcdee2;
 }
 .NumberPlate /deep/ .ivu-input-wrapper {
-  min-width: 113px;
-  width: 113px;
+  min-width: 113px !important;
+  width: 113px !important;
 }
 .NumberPlate /deep/ .ivu-input {
   border-radius: 0 4px 4px 0;

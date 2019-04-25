@@ -39,7 +39,7 @@ import { DatePicker } from 'iview'
       labelWidth: {
         type: Number,
         required: false,
-        default: 60
+        default: 80
       },
       startValueProp: {
         type: String,
@@ -115,8 +115,9 @@ import { DatePicker } from 'iview'
 }
 .label {
   display: inline-block;
-  width: 60px;
+  width: 80px;
   text-align: right;
   vertical-align: middle;
+  color: #666;
 }
 </style>

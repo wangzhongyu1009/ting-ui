@@ -6,6 +6,9 @@ import Input from './input/index.js'
 import Select from './select/index.js'
 import DatePicker from './datePicker/index.js'
 import CarNo from './carNo/index.js'
+import Info from './info/index.js'
+import Dialog from './dialog/index.js'
+import DialogForm from './dialogForm/index.js'
 import 'iview/dist/styles/iview.css'
 const components = [
   Table,
@@ -15,7 +18,10 @@ const components = [
   Input,
   Select,
   DatePicker,
-  CarNo
+  CarNo,
+  Info,
+  Dialog,
+  DialogForm
 ]
 
 const install = function(Vue) {
@@ -37,5 +43,8 @@ export default {
   Input,
   Select,
   DatePicker,
-  CarNo
+  CarNo,
+  Info,
+  Dialog,
+  DialogForm
 }

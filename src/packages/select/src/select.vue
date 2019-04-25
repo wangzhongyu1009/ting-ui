@@ -51,7 +51,7 @@ import { Select, Option } from 'iview'
       labelWidth: {
         type: Number,
         required: false,
-        default: 60
+        default: 80
       },
       filterable: {
         type: Boolean,

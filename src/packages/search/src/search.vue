@@ -36,6 +36,7 @@
        v-if="item.type === 'carno'"
        ref="carNo"
        @car-no-change="carNoChange"
+       :labelWidth="item.labelWidth"
        :itemKey="item['key']"
        :provinceProp="''"
        :numberProp="''"

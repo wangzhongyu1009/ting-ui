@@ -2,8 +2,13 @@
   <div id="app">
     <t-search @table-search="search" :options="searchOptions" :operate="searchOperate" @exportExcel="exportExcel" @add="add"></t-search>
 
-    <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption"></t-table>
+    <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption" :operate="operate"></t-table>
+    
+    <t-info :formData="formData" :operate="formOperate"></t-info>
 
+    <t-dialog-form :items="items" buttonText="新增" larger title="添加车队" @submit="submit" labelPosition="right"></t-dialog-form>
+
+    <t-dialog buttonText="提示" larger title="提示" @submit="submit" :contentText="contentText"></t-dialog>
   </div>
 </template>
 
@@ -14,6 +19,59 @@ export default {
   name: 'app',
   data () {
     return {
+      contentText: '您正在进行设备【12345】注销操作，该操作会导致相关联的设备和系统无法使用，是否要矩形这项操作？',
+      items: [{
+        type: 'input',
+        key: 'name',
+        placeholder: '请输入',
+        label: '姓名',
+        required: true,
+        message: '姓名不可为空'
+      },{
+        type: 'select',
+        key: 'city',
+        placeholder: '请输入',
+        label: '城市',
+        required: true,
+        message: '城市不能为空',
+        options: [{
+          label: '北京市',
+          value: 'beijing'
+        },{
+          label: '上海市',
+          value: 'shanghai'
+        },{
+          label: '广州市',
+          value: 'guangzhou'
+        }]
+      },{
+        type: 'checkbox',
+        key: 'fruit',
+        label: '报警提示种类',
+        required: true,
+        message: '勾选种类',
+        min: 1,
+        minMessage: '最少勾选一个',
+        max: 2,
+        maxMessage: '最多勾选两个',
+        checkboxs: [{
+          label: 'hahah',
+          value: 1
+        },{
+          label: 'asdasd',
+          value: 2
+        },{
+          label: 'zxzxc',
+          value: 3
+        }]
+      },{
+        type: 'textarea',
+        key: 'des',
+        placeholder: '请输入',
+        label: 'hahahaha',
+        required: true,
+        message: '姓名不可为空'
+      }],
       searchOptions: [{
         type: 'input',
         key: 'value1',
@@ -111,6 +169,9 @@ export default {
     },
     multipleSelect (val) {
       console.log(val, '已选条目')
+    },
+    submit (formData) {
+      console.log(formData)
     }
   }
 }

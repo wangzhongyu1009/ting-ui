@@ -10,11 +10,13 @@
       <template v-for="operate in operateData" slot-scope="{row,index}" :slot="operate.slot">
         <span>
           <t-button
+          :class="item['type']"
            v-for="(item,index) in operate.operate"
            :key="index"
            @click="handleClick(row, item.method)"
            type="text"
            :text="item.label"
+           :disabled="row[item.disabled]"
           ></t-button>
         </span>
       </template>
@@ -35,10 +37,41 @@
         :total="paginationOption.total">
       </Page>
     </div>
+
+    <div class="export_btn">
+      <t-button
+        :class="item['type']"
+        v-for="(item,index) in operate"
+        :key="index"
+        type="text"
+        :text="item.label"
+        @click="exportExcel(item)"
+      />
+    </div>
   </div>
 </template>
 
+<style lang="scss">
+  .ivu-btn-text.disabled, .ivu-btn-text.disabled.active, .ivu-btn-text.disabled:active, .ivu-btn-text.disabled:focus, .ivu-btn-text.disabled:hover, .ivu-btn-text[disabled], .ivu-btn-text[disabled].active, .ivu-btn-text[disabled]:active, .ivu-btn-text[disabled]:focus, .ivu-btn-text[disabled]:hover, fieldset[disabled] .ivu-btn-text, fieldset[disabled] .ivu-btn-text.active, fieldset[disabled] .ivu-btn-text:active, fieldset[disabled] .ivu-btn-text:focus, fieldset[disabled] .ivu-btn-text:hover {
+  background-color: rgba(0,0,0,0);
+  color: #CCC;
+}
+</style>
 <style lang="scss" scoped>
+.primary /deep/ .ivu-btn-text {
+  color: #108EE9;
+}
+.danger /deep/ .ivu-btn-text {
+  color: #F04134;
+}
+.table {
+  position: relative;
+  .export_btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
 .table /deep/ .ivu-table-header {
   th {
     border-right: none;
@@ -85,7 +118,7 @@ export default {
   name: 'TTable',
   data () {
     return {
-      
+
     }
   },
   components: {
@@ -101,6 +134,11 @@ export default {
     tableData: {
       type: Array,
       required: true,
+      default: () => []
+    },
+    operate: {
+      type: Array,
+      required: false,
       default: () => []
     },
     theme: {
@@ -187,6 +225,9 @@ export default {
         pageNum: val,
         pageSize: this.paginationOption.pageSize
       })
+    },
+    exportExcel (item) {
+      this.$emit(item.method)
     }
   }
 }
