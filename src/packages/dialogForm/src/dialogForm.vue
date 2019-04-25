@@ -1,6 +1,6 @@
 <template>
   <div style="display:inline-block">
-    <t-button :text="buttonText" :larger="larger" @click="modal=true"></t-button>
+    <t-button :text="buttonText" :larger="larger" @click="openModal"></t-button>
     <Modal
       v-model="modal"
       :mask-closable="false"
@@ -127,7 +127,6 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
         }
       })
       this.formValidate = formObj
-      console.log(this.formValidate)
     },
     computed: {
       labelWidth () {
@@ -138,15 +137,19 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox }
       }
     },
     methods: {
+      openModal () {
+        this.$refs['oForm'].resetFields()
+        this.modal = true
+      },
       submit () {
         this.$refs['oForm'].validate((valid) => {
           if (valid) {
             this.$emit('submit', this.formValidate)
+            this.modal = false
           }
         })
       },
       cancel () {
-        this.$refs['oForm'].resetFields()
         this.modal = false
       }
     }
