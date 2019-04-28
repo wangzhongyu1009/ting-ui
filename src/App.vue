@@ -6,9 +6,11 @@
     
     <t-info :formData="formData" :operate="formOperate"></t-info>
 
-    <t-dialog-form :items="items" buttonText="新增" larger title="添加车队" @submit="submit" labelPosition="right"></t-dialog-form>
+    <t-dialog-form :items="items" buttonText="新增" larger title="添加车队" @submit="submit" labelPosition="right" subTitle="这里是副标题"></t-dialog-form>
 
     <t-dialog buttonText="提示" larger title="提示" @submit="submit" :contentText="contentText"></t-dialog>
+
+    <t-step :steps="steps" :current="1"></t-step>
   </div>
 </template>
 
@@ -19,6 +21,23 @@ export default {
   name: 'app',
   data () {
     return {
+      steps: [{
+        title: '报警上传',
+        content: '2019.03.23 11:23:55 张三',
+        description: '发送指令：超速行驶，请减速'
+      },{
+        title: '报警上传',
+        content: '2019.03.23 11:23:55 张三',
+        description: '发送指令：超速行驶，请减速'
+      },{
+        title: '报警上传',
+        content: '2019.03.23 11:23:55 张三',
+        description: '发送指令：超速行驶，请减速'
+      },{
+        title: '报警上传',
+        content: '2019.03.23 11:23:55 张三',
+        description: '发送指令：超速行驶，请减速'
+      }],
       contentText: '您正在进行设备【12345】注销操作，该操作会导致相关联的设备和系统无法使用，是否要矩形这项操作？',
       items: [{
         type: 'input',

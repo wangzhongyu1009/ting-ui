@@ -99,9 +99,10 @@ import { Button } from 'iview'
 }
 .ivu-btn-text {
   color: #0486FE;
-  padding: 0 10px;
+  padding: 0 5px;
   font-weight: 500;
   letter-spacing: 1px;
+  min-width: 10px;
 }
 .ivu-btn-text:focus {
   box-shadow: none;

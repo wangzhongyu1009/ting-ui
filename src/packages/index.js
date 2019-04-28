@@ -9,6 +9,7 @@ import CarNo from './carNo/index.js'
 import Info from './info/index.js'
 import Dialog from './dialog/index.js'
 import DialogForm from './dialogForm/index.js'
+import Step from './step/index.js'
 import 'iview/dist/styles/iview.css'
 const components = [
   Table,
@@ -21,7 +22,8 @@ const components = [
   CarNo,
   Info,
   Dialog,
-  DialogForm
+  DialogForm,
+  Step
 ]
 
 const install = function(Vue) {
@@ -46,5 +48,6 @@ export default {
   CarNo,
   Info,
   Dialog,
-  DialogForm
+  DialogForm,
+  Step
 }

@@ -9,6 +9,7 @@
         <span>{{title}}</span>
       </p>
       <div :class="labelClass">
+        <div v-if="subTitle" class="sub_title">{{subTitle}}</div>
         <i-form ref="oForm" :model="formValidate" :rules="ruleValidate" :label-width="labelWidth" :label-position="labelPosition">
           <Form-item :label="item.label" :prop="item.key" v-for="(item,index) in items" :key="index" :class="item.type">
 
@@ -39,11 +40,10 @@
                 v-if="item.type === 'uploadfile'"
                 v-model="formValidate[item.key]"
                 :show-upload-list="false"
-                :format="['jpg','jpeg','png']"
                 action="http"
                 :before-upload="handleBeforeUpload"
               >
-                <t-button text="上传图片" type="plain" @click="uploadClick(item.key)"></t-button>
+                <t-button :text="uploadBtnText" type="plain" @click="uploadClick(item.key)"></t-button>
               </Upload>
               <img
                 v-if="item.type === 'uploadfile'"
@@ -126,6 +126,16 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, 
         type: String,
         required: false,
         default: 'right'
+      },
+      uploadBtnText: {
+        type: String,
+        required: false,
+        default: '上传图片'
+      },
+      subTitle: {
+        type: String,
+        required: false,
+        default: ''
       }
     },
     created () {
@@ -251,5 +261,8 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, 
 .company_img {
   margin-top: 10px;
   width: 274px;
+}
+.sub_title {
+  margin: 10px 0 20px;
 }
 </style>

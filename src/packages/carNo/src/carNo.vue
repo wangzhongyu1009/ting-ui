@@ -124,6 +124,7 @@ export default {
 }
 .NumberPlate /deep/ .ivu-input {
   border-radius: 0 4px 4px 0;
+  margin-left: -1px;
 }
 .NumberPlate /deep/ .ivu-select-dropdown-list {
   width: 276px;

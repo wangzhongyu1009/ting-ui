@@ -1,7 +1,7 @@
 <template>
   <div class="info">
 
-    <div>
+    <div :class="operate.length ? 'haveBtn' : 'noBtn'">
       <div class="container" v-for="(items,index) in formData" :key="index">
         <div v-for="(item,itemIndex) in items" :key="itemIndex">
           <span class="label">{{item.label}}：</span>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div style="margin-left: 50px" v-if="operate.length">
+    <div style="margin-left:50px;width:160px" v-if="operate.length">
       <t-button v-for="(item,index) in operate" :key="index" :text="item.label" style="margin-right: 8px" @click="outputEmit(item)"></t-button>
     </div>
     
@@ -41,14 +41,20 @@
     vertical-align: middle;
   }
   .container {
-    margin-bottom: 10px;
     & > div {
       display: inline-block;
+      margin: 5px 0;
     }
   }
   .container:last-child {
     margin-bottom: 0;
   }
+}
+.haveBtn {
+  max-width:calc(100% - 260px);
+}
+.noBtn {
+  max-width:100%;
 }
 </style>
 
