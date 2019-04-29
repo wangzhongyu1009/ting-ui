@@ -41,7 +41,14 @@
        :provinceProp="''"
        :numberProp="''"
       ></t-car-no>
-
+      
+      <t-time-picker
+       v-if="item.type === 'time'"
+       :label="item.label"
+       :labelWidth="item.labelWidth"
+       :placeholder="item.placeholder"
+       v-model="item['value']"
+      ></t-time-picker>
     </div>
 
     <t-button text="重置" @click="reset"></t-button>

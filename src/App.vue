@@ -1,12 +1,13 @@
 <template>
   <div id="app">
+    
     <t-search @table-search="search" :options="searchOptions" :operate="searchOperate" @exportExcel="exportExcel" @add="add"></t-search>
 
     <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption" :operate="operate"></t-table>
     
     <t-info :formData="formData" :operate="formOperate"></t-info>
 
-    <t-dialog-form :items="items" buttonText="新增" larger title="添加车队" @submit="submit" labelPosition="right" subTitle="这里是副标题"></t-dialog-form>
+    <t-dialog-form :items="items" buttonText="新增" buttonType="text" title="添加车队" @submit="submit" labelPosition="right" subTitle="这里是副标题"></t-dialog-form>
 
     <t-dialog buttonText="提示" larger title="提示" @submit="submit" :contentText="contentText"></t-dialog>
 
@@ -21,6 +22,7 @@ export default {
   name: 'app',
   data () {
     return {
+      timePicker: '',
       steps: [{
         title: '报警上传',
         content: '2019.03.23 11:23:55 张三',
@@ -47,9 +49,17 @@ export default {
         required: true,
         message: '姓名不可为空'
       },{
+        type: 'time',
+        key: 'time',
+        placeholder: '请输入',
+        label: '时间：',
+        required: true,
+        message: '时间不可为空'
+      },{
         type: 'select',
         key: 'city',
         placeholder: '请输入',
+        filterable: true,
         label: '城市：',
         required: true,
         message: '城市不能为空',
@@ -108,6 +118,46 @@ export default {
         label: '上传行驶证：',
         required: true,
         message: '请上传图片'
+      },{
+        type: 'tree',
+        key: 'treeData',
+        label: '菜单：',
+        data: [
+          {
+            title: 'parent 1',
+            id: 1,
+            children: [
+              {
+                title: 'parent 1-1',
+                id: 11,
+                children: [
+                  {
+                    title: 'leaf 1-1-1',
+                    id: 111,
+                  },
+                  {
+                    title: 'leaf 1-1-2',
+                    id: 112,
+                  }
+                ]
+              },
+              {
+                title: 'parent 1-2',
+                id: 12,
+                children: [
+                  {
+                    title: 'leaf 1-2-1',
+                    id: 121,
+                  },
+                  {
+                    title: 'leaf 1-2-2',
+                    id: 122,
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }],
       searchOptions: [{
         type: 'input',
@@ -175,6 +225,13 @@ export default {
         startValue: '',
         endKey: 'value8',
         endValue: ''
+      },{
+        type: 'time',
+        key: 'value10',
+        value: '',
+        label: '时间',
+        placeholder: '请输入',
+        labelWidth: 80
       }],
       searchOperate: [{
         text: '导出',
@@ -209,6 +266,9 @@ export default {
     },
     submit (formData) {
       console.log(formData)
+    },
+    timePickerChange (val) {
+      console.log(val)
     }
   }
 }

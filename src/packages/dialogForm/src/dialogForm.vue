@@ -15,7 +15,9 @@
 
               <i-input v-if="item.type=='input'" v-model="formValidate[item.key]" :placeholder="item.placeholder"></i-input>
 
-              <i-select v-if="item.type=='select'" v-model="formValidate[item.key]" :placeholder="item.placeholder">
+              <t-time-picker v-if="item.type=='time'" v-model="formValidate[item.key]" :placeholder="item.placeholder" label=""></t-time-picker>
+
+              <i-select v-if="item.type=='select'" v-model="formValidate[item.key]" :placeholder="item.placeholder" :filterable="item.filterable">
                 <i-option v-for="(option,optionIndex) in item.options" :key="optionIndex" :value="option.value">{{option.label}}</i-option>
               </i-select>
 
@@ -51,6 +53,8 @@
                 :src="formValidate[item.key]"
               >
 
+              <t-tree ref="tree" v-if="item.type === 'tree'" :itemKey="item.key" :treeData="item.data" checkbox @onCheckChange="onCheckChange"></t-tree>
+
           </Form-item>
         </i-form>
       </div>
@@ -63,7 +67,7 @@
 </template>
 
 <script>
-import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, Upload } from 'iview'
+import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, Upload, Tree } from 'iview'
   export default {
     name: 'TDialogForm',
     components: {
@@ -75,7 +79,8 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, 
       IOption: Option,
       CheckboxGroup,
       Checkbox,
-      Upload
+      Upload,
+      Tree
     },
     data () {
       return {
@@ -83,6 +88,7 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, 
         formValidate: {},
         ruleValidate: {},
         carNo: {},
+        tree: {},
         currentKey: ''
       }
     },
@@ -191,20 +197,29 @@ import { Modal, Form, FormItem, Input, Select, Option, CheckboxGroup, Checkbox, 
             item.numberProp = ''
           })
         }
+        if (this.$refs.tree) {
+          this.$refs.tree.forEach(item => {
+            item.treeDataProp = JSON.parse(JSON.stringify(item.treeDataClone))
+          })
+        }
         this.carNo = {}
+        this.tree = {}
         this.$refs['oForm'].resetFields()
         this.modal = true
       },
       submit () {
         this.$refs['oForm'].validate((valid) => {
           if (valid) {
-            this.$emit('submit', Object.assign(this.formValidate,this.carNo))
+            this.$emit('submit', Object.assign(this.formValidate,this.carNo,this.tree))
             this.modal = false
           }
         })
       },
       cancel () {
         this.modal = false
+      },
+      onCheckChange (val) {
+        Object.assign(this.tree,val)
       },
       carNoChange (val) {
         Object.assign(this.carNo,val)

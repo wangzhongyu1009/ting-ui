@@ -10,6 +10,8 @@ import Info from './info/index.js'
 import Dialog from './dialog/index.js'
 import DialogForm from './dialogForm/index.js'
 import Step from './step/index.js'
+import Tree from './tree/index.js'
+import TimePicker from './timePicker/index.js'
 import 'iview/dist/styles/iview.css'
 const components = [
   Table,
@@ -23,7 +25,9 @@ const components = [
   Info,
   Dialog,
   DialogForm,
-  Step
+  Step,
+  Tree,
+  TimePicker
 ]
 
 const install = function(Vue) {
@@ -49,5 +53,7 @@ export default {
   Info,
   Dialog,
   DialogForm,
-  Step
+  Step,
+  Tree,
+  TimePicker
 }
