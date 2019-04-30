@@ -10,8 +10,8 @@
       </div>
     </div>
 
-    <div style="margin-left:50px;width:160px" v-if="operate.length">
-      <t-button v-for="(item,index) in operate" :key="index" :text="item.label" style="margin-right: 8px" @click="outputEmit(item)"></t-button>
+    <div style="margin-left:50px" :style="{'width': operateWidth + 'px'}" v-if="operate.length">
+      <t-button v-for="(item,index) in operate" :key="index" :text="item.label" :type="item.type" style="margin-right: 8px" @click="outputEmit(item)"></t-button>
     </div>
     
   </div>
@@ -76,6 +76,11 @@
         type: Array,
         required: false,
         default: () => []
+      },
+      operateWidth: {
+        type: Number,
+        required: false,
+        default: 160
       }
     },
     created () {

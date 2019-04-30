@@ -5,7 +5,7 @@
 
     <t-table multiple @multiple-select="multipleSelect" @aaa="aaa" @bbb="bbb" :tableData="tableData" pagination :columns="columns" @pagination-change="paginationChange" :paginationOption="paginationOption" :operate="operate"></t-table>
     
-    <t-info :formData="formData" :operate="formOperate"></t-info>
+    <t-info :formData="formData" :operate="formOperate" :operateWidth="160"></t-info>
 
     <t-dialog-form :items="items" buttonText="新增" buttonType="text" title="添加车队" @submit="submit" labelPosition="right" subTitle="这里是副标题"></t-dialog-form>
 

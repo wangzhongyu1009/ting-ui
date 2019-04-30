@@ -124,7 +124,8 @@ export default {
       }],
       formOperate: [{
         label: '下载',
-        method: 'download'
+        method: 'download',
+        type: 'error'
       },{
         label: '下载',
         method: 'download2'
