@@ -165,14 +165,10 @@ export default {
       default: false
     },
     paginationOption: {
+      type: Object,
       required: false,
-      default: {
-        total: 0,
-        pageNum: 1,
-        pageSize: 10,
-        pageSizes: [10, 20, 30, 40]
-      }
-    },
+      default: () => {}
+    }
   },
   computed: {
     themeClass () {
